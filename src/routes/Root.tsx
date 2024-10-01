@@ -1,6 +1,6 @@
 import React from 'react';
 
-function App() {
+function Root() {
   return (
     <div>
       Hello World!
@@ -8,4 +8,4 @@ function App() {
   );
 }
 
-export default App;
+export default Root;

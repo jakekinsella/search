@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
+import { Icon } from '../components/Icon';
+
 import { colors } from '../constants';
 
-export const Container = styled.div`
+const Container = styled.div`
   width: 100%;
   height: 65%;
 `;
 
-export const Title = styled.h1`
+const Title = styled.h1`
   font-size: 36px;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
@@ -16,7 +18,7 @@ export const Title = styled.h1`
   padding-bottom: 20px;
 `;
 
-export const SearchArea = styled.div`
+const SearchArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,11 +28,11 @@ export const SearchArea = styled.div`
   height: 100%;
 `;
 
-export const SearchContainer = styled.div`
+const SearchContainer = styled.div`
   width: 50%;
 `;
 
-export const Form = styled.form`
+const Form = styled.form`
   display:flex;
   flex-direction:row;
 
@@ -38,7 +40,7 @@ export const Form = styled.form`
   border-radius: 5px;
 `;
 
-export const SearchBar = styled.input`
+const SearchBar = styled.input`
   display: block;
   box-sizing: border-box;
 
@@ -59,11 +61,12 @@ export const SearchBar = styled.input`
   }
 `;
 
-export const SearchButton = styled.button`
+const SearchButton = styled.button`
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
 
+  padding-top: 8px;
   padding-left: 15px;
   padding-right: 15px;
 
@@ -72,17 +75,19 @@ export const SearchButton = styled.button`
   border-left: 1.5px solid ${colors.lightBlack};
   cursor: pointer;
 
-  input:focus ~ & {
-    background: ${colors.whiteActive};
-
-    &:hover {
-      background: ${colors.lightGray};
-    }
-  }
+  color: ${colors.black2};
 
   &:hover {
+    background: ${colors.whiteHover};
+  }
+
+  &:active {
     background: ${colors.whiteActive};
   }
+`;
+
+const ReflectX = styled.div`
+  transform: scaleX(-1);
 `;
 
 function Root() {
@@ -101,7 +106,9 @@ function Root() {
 
           <Form onSubmit={onSubmit}>
             <SearchBar onChange={(event) => setSearch(event.target.value)} />
-            <SearchButton>Go</SearchButton>
+            <SearchButton>
+              <ReflectX><Icon icon="search" size="1.25em" /></ReflectX>
+            </SearchButton>
 
             <input type="submit" style={{ display: "none" }} />
           </Form>

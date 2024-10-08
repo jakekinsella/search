@@ -1,4 +1,9 @@
 # Search
 
+Search _somewhere_, disaggregate the internet.
+
 ## To-Do
- - Everything
+ - Wrap up frontend
+ - Connect to Central
+ - Deploy
+ - Add custom search locations

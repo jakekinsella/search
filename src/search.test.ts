@@ -1,89 +1,95 @@
 import { Parser } from './search';
 
-it('simple query', () => {
-  expect(Parser.Language.Input.tryParse("foobar"))
-    .toEqual([
-      { type: "Query", value: "foobar" }
-    ]);
-});
-
 it('simple query with bang at end', () => {
-  expect(Parser.Language.Input.tryParse("foobar !google"))
-    .toEqual([
-      { type: "Query", value: "foobar " },
-      { type: "Bang", value: "google" }
-    ]);
+  expect(Parser.parse("foobar !google"))
+    .toEqual({
+      query: "foobar",
+      bangs: ["google"]
+    });
 });
 
 it('simple query with bang at beginning', () => {
-  expect(Parser.Language.Input.tryParse("!google foobar"))
-    .toEqual([
-      { type: "Bang", value: "google" },
-      { type: "Query", value: " foobar" }
-    ]);
+  expect(Parser.parse("!google foobar"))
+    .toEqual({
+      query: "foobar",
+      bangs: ["google"]
+    });
 });
 
 it('empty query', () => {
-  expect(Parser.Language.Input.tryParse(""))
-    .toEqual([]);
+  expect(Parser.parse(""))
+    .toEqual({
+      error: "Failed to parse: empty query"
+    });
 });
 
 it('empty bang', () => {
-  expect(() => Parser.Language.Input.tryParse("foobar ! garbage")).toThrow();
+  expect(Parser.parse("foobar ! garbage"))
+    .toEqual({
+      error: "Failed to parse: unknown"
+    });
 });
 
 it('empty query and bang', () => {
-  expect(() => Parser.Language.Input.tryParse("!")).toThrow();
+  expect(Parser.parse("!"))
+    .toEqual({
+      error: "Failed to parse: unknown"
+    });
 });
 
 
 it('query/bang mix', () => {
-  expect(Parser.Language.Input.tryParse("foobar !google again"))
-    .toEqual([
-      { type: "Query", value: "foobar " },
-      { type: "Bang", value: "google" },
-      { type: "Query", value: " again" },
-    ]);
+  expect(Parser.parse("foobar !google again"))
+    .toEqual({
+      query: "foobar again",
+      bangs: ["google"]
+    });
 });
 
 it('query/bang mix 2', () => {
-  expect(Parser.Language.Input.tryParse("!yahoo foobar !google again !amazon"))
-    .toEqual([
-      { type: "Bang", value: "yahoo" },
-      { type: "Query", value: " foobar " },
-      { type: "Bang", value: "google" },
-      { type: "Query", value: " again " },
-      { type: "Bang", value: "amazon" },
-    ]);
+  expect(Parser.parse("!yahoo foobar !google again !amazon"))
+    .toEqual({
+      query: "foobar again",
+      bangs: ["yahoo", "google", "amazon"]
+    });
 });
 
 it('quoted query', () => {
-  expect(Parser.Language.Input.tryParse("\"foobar\""))
-    .toEqual([
-      { type: "Query", value: "\"foobar\"" }
-    ]);
+  expect(Parser.parse("\"foobar\" !ignore"))
+    .toEqual({
+      query: "\"foobar\"",
+      bangs: ["ignore"]
+    });
 });
 
 it('quoted query 2', () => {
-  expect(Parser.Language.Input.tryParse("foo \"\" bar"))
-    .toEqual([
-      { type: "Query", value: "foo " },
-      { type: "Query", value: "\"\"" },
-      { type: "Query", value: " bar" },
-    ]);
+  expect(Parser.parse("foo \"\" bar !ignore"))
+    .toEqual({
+      query: "foo \"\" bar",
+      bangs: ["ignore"]
+    });
 });
 
 it('quoted query with bang', () => {
-  expect(Parser.Language.Input.tryParse("\"foobar !garbage\""))
-    .toEqual([
-      { type: "Query", value: "\"foobar !garbage\"" },
-    ]);
+  expect(Parser.parse("\"foobar !garbage\" !google"))
+    .toEqual({
+      query: "\"foobar !garbage\"",
+      bangs: ["google"]
+    });
 });
 
 it('quoted query with bang 2', () => {
-  expect(Parser.Language.Input.tryParse("\"foobar !garbage\"!google"))
-    .toEqual([
-      { type: "Query", value: "\"foobar !garbage\"" },
-      { type: "Bang", value: "google" }
-    ]);
+  expect(Parser.parse("\"foobar !garbage\"!google"))
+    .toEqual({
+      query: "\"foobar !garbage\"",
+      bangs: ["google"]
+    });
+});
+
+it('quoted query with escape', () => {
+  expect(Parser.parse("\"foobar\\\"\" !ignore"))
+    .toEqual({
+      query: "\"foobar\\\"\"",
+      bangs: ["ignore"]
+    });
 });

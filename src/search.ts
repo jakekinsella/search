@@ -2,24 +2,39 @@ import P from 'parsimmon';
 
 export type T = Result | Error;
 
+export interface Result {
+  type: "result";
+  locations: string[];
+}
+
 export interface Error {
   type: "error";
   error: string;
 }
 
 export namespace Parser {
-  interface Token {
-    type: string;
+  export type T = Result | Error;
+
+  interface Result {
+    type: "result";
+    query: string;
+    bangs: string[];
   }
 
-  interface Query extends Token {
-    type: "Query";
-    value: string;
-  }
+  namespace Token {
+    export interface T {
+      type: string;
+    }
 
-  interface Bang extends Token {
-    type: "Bang";
-    value: string;
+    export interface Query extends T {
+      type: "Query";
+      value: string;
+    }
+
+    export interface Bang extends T {
+      type: "Bang";
+      value: string;
+    }
   }
 
   export const Language = P.createLanguage({
@@ -34,21 +49,15 @@ export namespace Parser {
     Input: (r) => P.alt(r.Query, r.Bang).many(),
   });
 
-  interface Result {
-    type: "result";
-    query: string;
-    bangs: string[];
-  }
-
-  export const parse = (query: string) => {
+  export const parse = (query: string): T => {
     try {
       const tokens = Language.Input.tryParse(query);
       const resolvedQuery = tokens
-        .filter(token => token.type == "Query")
-        .filter(token => token.value != "")
-        .map(token => token.value)
+        .filter((token: Token.T) => token.type == "Query")
+        .filter((token: Token.Query) => token.value != "")
+        .map((token: Token.Query) => token.value)
         .join(" ");
-      const resolvedBangs = tokens.filter(token => token.type == "Bang").map(token => token.value);
+      const resolvedBangs = tokens.filter((token: Token.T) => token.type == "Bang").map((token: Token.Bang) => token.value);
 
       if (resolvedQuery == "") {
         return { type: "error", error: "Failed to parse: empty query" };
@@ -65,25 +74,27 @@ export namespace Parser {
 }
 
 namespace Bang {
-  interface T {
+  export interface T {
     name: string;
     template: string;
   }
 
-  export const resolve = (bang: Bang) => (query: string) : string => {
+  export const resolve = (bang: T) => (query: string): string => {
     return bang.template.replace("<query>", query);
   }
 }
 
-export const execute = (_bangs: Bang[]) => (query: string) : Result | Error => {
-  const bangs = _bangs.reduce((map, bang) => { map[bang.name] = bang; return map }, {});
+export const execute = (_bangs: Bang.T[]) => (query: string): T => {
+  const bangs = _bangs.reduce((map, bang) => { map.set(bang.name, bang); return map }, new Map<string, Bang.T>);
 
   const out = Parser.parse(query);
   if (out.type == "error") {
     return out;
   } else {
-    const resolved = out.bangs.map(bang => bangs[bang]);
-    if (resolved.filter(bang => bang == undefined).length == 0) {
+    const resolved = out.bangs
+      .map(bang => bangs.get(bang))
+      .reduce((acc, bang) => { if (bang != undefined) { acc.push(bang) }; return acc }, [] as Bang.T[]);
+    if (out.bangs.length == resolved.length) {
       return { type: "result", locations: resolved.map(bang => Bang.resolve(bang)(out.query)) }
     } else {
       return { type: "error", error: `Invalid bang in [${out.bangs}]` };

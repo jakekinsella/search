@@ -53,21 +53,20 @@ export namespace Parser {
     try {
       const tokens = Language.Input.tryParse(query);
       const resolvedQuery = tokens
-        .filter((token: Token.T) => token.type == "Query")
-        .filter((token: Token.Query) => token.value != "")
+        .filter((token: Token.T) => token.type === "Query")
+        .filter((token: Token.Query) => token.value !== "")
         .map((token: Token.Query) => token.value)
         .join(" ");
-      const resolvedBangs = tokens.filter((token: Token.T) => token.type == "Bang").map((token: Token.Bang) => token.value);
+      const resolvedBangs = tokens.filter((token: Token.T) => token.type === "Bang").map((token: Token.Bang) => token.value);
 
-      if (resolvedQuery == "") {
+      if (resolvedQuery === "") {
         return { type: "error", error: "Failed to parse: empty query" };
-      } else if (resolvedBangs.length == 0) {
+      } else if (resolvedBangs.length === 0) {
         return { type: "error", error: "Failed to parse: empty bangs" };
       } else {
         return { type: "result", query: resolvedQuery, bangs: resolvedBangs };
       }
     } catch (e) {
-      console.log(e)
       return { type: "error", error: "Failed to parse: unknown" };
     }
   }
@@ -85,16 +84,16 @@ namespace Bang {
 }
 
 export const execute = (_bangs: Bang.T[]) => (query: string): T => {
-  const bangs = _bangs.reduce((map, bang) => { map.set(bang.name, bang); return map }, new Map<string, Bang.T>);
+  const bangs = _bangs.reduce((map, bang) => { map.set(bang.name, bang); return map }, new Map<string, Bang.T>());
 
   const out = Parser.parse(query);
-  if (out.type == "error") {
+  if (out.type === "error") {
     return out;
   } else {
     const resolved = out.bangs
       .map(bang => bangs.get(bang))
-      .reduce((acc, bang) => { if (bang != undefined) { acc.push(bang) }; return acc }, [] as Bang.T[]);
-    if (out.bangs.length == resolved.length) {
+      .reduce((acc, bang) => { if (bang !== undefined) { acc.push(bang) }; return acc }, [] as Bang.T[]);
+    if (out.bangs.length === resolved.length) {
       return { type: "result", locations: resolved.map(bang => Bang.resolve(bang)(out.query)) }
     } else {
       return { type: "error", error: `Invalid bang in [${out.bangs}]` };

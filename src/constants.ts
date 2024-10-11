@@ -12,3 +12,11 @@ export const colors = {
 
   red: '#ef5350'
 };
+
+export const bangs = [
+  { name: "google", template: "https://www.google.com/search?q=<query>" },
+  { name: "g", template: "https://www.google.com/search?q=<query>" },
+
+  { name: "amazon", template: "https://www.amazon.com/s?k=<query>" },
+  { name: "a", template: "https://www.amazon.com/s?k=<query>" }
+];

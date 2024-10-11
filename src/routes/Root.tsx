@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import styled from '@emotion/styled';
 
 import { Icon } from '../components/Icon';
@@ -20,6 +23,7 @@ const Title = styled.h1`
 
 const SearchArea = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -90,12 +94,29 @@ const ReflectX = styled.div`
   transform: scaleX(-1);
 `;
 
+const ErrorLabel = styled.div`
+  width: 100%
+  height: 20px;
+  margin-top: 5px;
+
+  font-size: 14px;
+`;
+
 function Root() {
-  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+  const [params, setParams] = useSearchParams();
+  const [search, setSearch] = useState(params.get("q"));
+  const [error, setError] = useState(params.get("e"));
+
+  useEffect(() => {
+    setParams("taint");
+  }, []);
+
+  // TODO: JK clear out e when going back in history
 
   function onSubmit(event: any) {
     event.preventDefault();
-    console.log(`Search: ${search}`)
+    navigate(`/search?q=${search}`)
   }
 
   return (
@@ -113,6 +134,7 @@ function Root() {
             <input type="submit" style={{ display: "none" }} />
           </Form>
         </SearchContainer>
+        <ErrorLabel>{error}</ErrorLabel>
       </SearchArea>
     </Container>
   );

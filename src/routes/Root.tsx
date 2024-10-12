@@ -109,7 +109,7 @@ function Root() {
   const [error, setError] = useState(params.get("e"));
 
   useEffect(() => {
-    setParams("taint");
+    setParams({});
   }, []);
 
   // TODO: JK clear out e when going back in history

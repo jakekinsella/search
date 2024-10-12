@@ -11,6 +11,7 @@ function SearchRedirect() {
   const [params, setParams] = useSearchParams();
   const query = params.get("q");
 
+  let executed = false;
   useEffect(() => {
     if (query !== null) {
       const result = Search.execute(bangs)(query);
@@ -18,11 +19,12 @@ function SearchRedirect() {
         navigate(`/?q=&e=${encodeURIComponent(result.error)}`)
       } else if (result.locations.length === 0) {
         navigate(`/?q=&e=${encodeURIComponent("Failed to search: unknown error")}`);
-      } else {
+      } else if (!executed) {
+        executed = true;
         const head = result.locations[0];
         const rest = result.locations.slice(1);
 
-        setParams("taint");
+        setParams({});
         rest.map((location: string) => window.open(location))
         window.focus();
         window.location.href = head;

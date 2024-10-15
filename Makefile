@@ -1,5 +1,7 @@
-cluster-publish:
+release:
 	yarn build
+
+cluster-publish:
 	make -f deploy/Makefile publish
 
 cluster-deploy:

@@ -10,6 +10,7 @@ injectGlobal`
         height: 100%;
         position: relative;
         color: ${colors.black};
+        background-color: ${colors.white};
         font-family: 'Roboto', sans-serif;
         font-weight: 100;
     }

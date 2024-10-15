@@ -70,6 +70,9 @@ const SearchBar = styled.input`
 
   border: none;
 
+  background: transparent;
+  color: ${colors.black};
+
   &:focus {
     outline: none;
   }
@@ -137,7 +140,7 @@ const Settings = styled.a`
 function Root() {
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
-  const [search, setSearch] = useState(params.get("q"));
+  const [search, setSearch] = useState(params.get("q") === null ? "" : params.get("q"));
   const [error] = useState(params.get("e"));
 
   useEffect(() => {

@@ -39,4 +39,3 @@ Deploy the cluster:
 
 ## To-Do
  - Add custom search locations
- - Dark mode

@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: search-ingress
+spec:
+  tls:
+  - hosts:
+      - $HOST
+      - $HOST2
+    secretName: reader-cert
+  rules:
+  - host: $HOST
+    http:
+      paths:
+        - backend:
+            service:
+              name: search
+              port:
+                number: 8280
+          path: /
+          pathType: Prefix
+  - host: $HOST2
+    http:
+      paths:
+        - backend:
+            service:
+              name: search
+              port:
+                number: 8280
+          path: /
+          pathType: Prefix
+  defaultBackend:
+    service:
+      name: search
+      port:
+        number: 8280

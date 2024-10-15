@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
@@ -11,16 +11,16 @@ function SearchRedirect() {
   const [params, setParams] = useSearchParams();
   const query = params.get("q");
 
-  let executed = false;
+  const executed = useRef(false);
   useEffect(() => {
     if (query !== null) {
       const result = Search.execute(bangs)(query);
       if (result.type === "error") {
-        navigate(`/?q=&e=${encodeURIComponent(result.error)}`)
+        navigate(`/?q=${encodeURIComponent(query)}&e=${encodeURIComponent(result.error)}`)
       } else if (result.locations.length === 0) {
-        navigate(`/?q=&e=${encodeURIComponent("Failed to search: unknown error")}`);
-      } else if (!executed) {
-        executed = true;
+        navigate(`/?q=${encodeURIComponent(query)}&e=${encodeURIComponent("Failed to search: unknown error")}`);
+      } else if (!executed.current) {
+        executed.current = true;
         const head = result.locations[0];
         const rest = result.locations.slice(1);
 
@@ -32,7 +32,7 @@ function SearchRedirect() {
     } else {
       navigate(`/`)
     }
-  }, [query])
+  }, [query, navigate, setParams])
 
   return (
     <div />

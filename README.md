@@ -39,6 +39,4 @@ Deploy the cluster:
 
 ## To-Do
  - Add custom search locations
- - On error, leave text in search box
- - On error, don't change vertical centering
  - Dark mode

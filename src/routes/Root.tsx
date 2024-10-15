@@ -34,7 +34,6 @@ const Title = styled.h1`
 const SearchArea = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
 
@@ -44,6 +43,7 @@ const SearchArea = styled.div`
 
 const SearchContainer = styled.div`
   width: 50%;
+  margin-top: 25vh;
 `;
 
 const Form = styled.form`
@@ -142,7 +142,7 @@ function Root() {
 
   useEffect(() => {
     setParams({});
-  }, []);
+  }, [setParams]);
 
   function onSubmit(event: any) {
     event.preventDefault();
@@ -158,7 +158,7 @@ function Root() {
               <Title>Search Somewhere</Title>
 
               <Form onSubmit={onSubmit}>
-                <SearchBar onChange={(event) => setSearch(event.target.value)} />
+                <SearchBar value={search === null ? "" : search} onChange={(event) => setSearch(event.target.value)} />
                 <SearchButton>
                   <ReflectX><Icon icon="search" size="1.25em" /></ReflectX>
                 </SearchButton>

@@ -8,6 +8,16 @@ import { Icon } from '../components/Icon';
 
 import { colors } from '../constants';
 
+const Page = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const PageInner = styled.div`
+  width: 100%;
+  height: 96%;
+`;
+
 const Container = styled.div`
   width: 100%;
   height: 65%;
@@ -102,17 +112,37 @@ const ErrorLabel = styled.div`
   font-size: 14px;
 `;
 
+const Footer = styled.div`
+  text-align: right;
+
+  padding-right: 20px;
+`;
+
+const Settings = styled.a`
+  cursor: pointer;
+  user-select: none;
+
+  color: ${colors.black};
+  text-decoration: none;
+
+  &:hover {
+    color: ${colors.blackHover};
+  }
+
+  &:active {
+    color: ${colors.blackActive};
+  }
+`;
+
 function Root() {
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
   const [search, setSearch] = useState(params.get("q"));
-  const [error, setError] = useState(params.get("e"));
+  const [error] = useState(params.get("e"));
 
   useEffect(() => {
     setParams({});
   }, []);
-
-  // TODO: JK clear out e when going back in history
 
   function onSubmit(event: any) {
     event.preventDefault();
@@ -120,23 +150,31 @@ function Root() {
   }
 
   return (
-    <Container>
-      <SearchArea>
-        <SearchContainer>
-          <Title>Search Somewhere</Title>
+    <Page>
+      <PageInner>
+        <Container>
+          <SearchArea>
+            <SearchContainer>
+              <Title>Search Somewhere</Title>
 
-          <Form onSubmit={onSubmit}>
-            <SearchBar onChange={(event) => setSearch(event.target.value)} />
-            <SearchButton>
-              <ReflectX><Icon icon="search" size="1.25em" /></ReflectX>
-            </SearchButton>
+              <Form onSubmit={onSubmit}>
+                <SearchBar onChange={(event) => setSearch(event.target.value)} />
+                <SearchButton>
+                  <ReflectX><Icon icon="search" size="1.25em" /></ReflectX>
+                </SearchButton>
 
-            <input type="submit" style={{ display: "none" }} />
-          </Form>
-        </SearchContainer>
-        <ErrorLabel>{error}</ErrorLabel>
-      </SearchArea>
-    </Container>
+                <input type="submit" style={{ display: "none" }} />
+              </Form>
+            </SearchContainer>
+            <ErrorLabel>{error}</ErrorLabel>
+          </SearchArea>
+        </Container>
+      </PageInner>
+
+      <Footer>
+        <Settings href="/settings">Settings</Settings>
+      </Footer>
+    </Page>
   );
 }
 

@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Root from './routes/Root';
 import SearchRedirect from './routes/SearchRedirect';
+import Settings from './routes/Settings';
 import NotFound from './routes/NotFound';
 
 import './global-styles';
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: <SearchRedirect />
+  },
+  {
+    path: "/settings",
+    element: <Settings />
   },
   {
     path: "/",

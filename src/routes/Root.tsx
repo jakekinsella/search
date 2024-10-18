@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import styled from '@emotion/styled';
 
-import { Icon } from '../components/Icon';
+import { Icon } from 'central';
 
 import { colors } from '../constants';
 

@@ -1290,7 +1290,7 @@
     "@emotion/weak-memoize" "^0.4.0"
     stylis "4.2.0"
 
-"@emotion/css@^11.13.4":
+"@emotion/css@^11.13.4", "@emotion/css@^11.7.1":
   version "11.13.4"
   resolved "https://registry.yarnpkg.com/@emotion/css/-/css-11.13.4.tgz#a5128e34a23f5e2c891970b8ec98a60c5a2395e1"
   integrity sha512-CthbOD5EBw+iN0rfM96Tuv5kaZN4nxPyYDvGUs0bc7wZBBiU/0mse+l+0O9RshW2d+v5HH1cme+BAbLJ/3Folw==
@@ -1318,7 +1318,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.9.0.tgz#745969d649977776b43fc7648c556aaa462b4102"
   integrity sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==
 
-"@emotion/react@^11.13.3":
+"@emotion/react@^11.13.3", "@emotion/react@^11.7.1":
   version "11.13.3"
   resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.13.3.tgz#a69d0de2a23f5b48e0acf210416638010e4bd2e4"
   integrity sha512-lIsdU6JNrmYfJ5EbUCf4xW1ovy5wKQ2CkPRM4xogziOxH1nXxBSjpC9YqbFAP7circxMfYp+6x676BqWcEiixg==
@@ -1348,7 +1348,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/sheet/-/sheet-1.4.0.tgz#c9299c34d248bc26e82563735f78953d2efca83c"
   integrity sha512-fTBW9/8r2w3dXWYM4HCB1Rdp8NLibOw2+XELH5m5+AkWiL/KqYX6dc0kKYlaYyKjrQ6ds33MCdMPEwgs2z1rqg==
 
-"@emotion/styled@^11.13.0":
+"@emotion/styled@^11.13.0", "@emotion/styled@^11.6.0":
   version "11.13.0"
   resolved "https://registry.yarnpkg.com/@emotion/styled/-/styled-11.13.0.tgz#633fd700db701472c7a5dbef54d6f9834e9fb190"
   integrity sha512-tkzkY7nQhW/zC4hztlwucpT8QEZ6eUzpXDRhww/Eej4tFfO0FxQYWRyg/c5CCXa4d/f174kqeXYjuQRnhzf6dA==
@@ -2284,6 +2284,13 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.7.tgz#50ae4353eaaddc04044279812f52c8c65857dbcb"
   integrity sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==
 
+"@types/react-dom@^17.0.9":
+  version "17.0.25"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.25.tgz#e0e5b3571e1069625b3a3da2b279379aa33a0cb5"
+  integrity sha512-urx7A7UxkZQmThYA4So0NelOVjx3V4rNFVJwp0WZlbIK5eM4rNJDiN3R/E9ix0MBh6kAEojk/9YL+Te6D9zHNA==
+  dependencies:
+    "@types/react" "^17"
+
 "@types/react-dom@^18.0.0":
   version "18.3.0"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.3.0.tgz#0cbc818755d87066ab6ca74fbedb2547d74a82b0"
@@ -2299,6 +2306,15 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
+"@types/react@^17", "@types/react@^17.0.20":
+  version "17.0.83"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.83.tgz#b477c56387b74279281149dcf5ba2a1e2216d131"
+  integrity sha512-l0m4ArKJvmFtR4e8UmKrj1pB4tUgOhJITf+mADyF/p69Ts1YAR/E+G9XEM0mHXKVRa1dQNHseyyDNzeuAXfXQw==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "^0.16"
+    csstype "^3.0.2"
+
 "@types/resolve@1.17.1":
   version "1.17.1"
   resolved "https://registry.yarnpkg.com/@types/resolve/-/resolve-1.17.1.tgz#3afd6ad8967c77e4376c598a82ddd58f46ec45d6"
@@ -2310,6 +2326,11 @@
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
   integrity sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==
+
+"@types/scheduler@^0.16":
+  version "0.16.8"
+  resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.8.tgz#ce5ace04cfeabe7ef87c0091e50752e36707deff"
+  integrity sha512-WZLiwShhwLRmeV6zH+GkbOFT6Z6VklCItrDioxUnv+u4Ll+8vKeFySoFyK/0ctcRpOmwAicELfmys1sDc/Rw+A==
 
 "@types/semver@^7.3.12":
   version "7.5.8"
@@ -3309,6 +3330,19 @@ case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.4.0.tgz#db64066c6422eed2e08cc14b986ca43796dbc6d4"
   integrity sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==
+
+central@../central/common/react:
+  version "0.1.0"
+  dependencies:
+    "@emotion/css" "^11.7.1"
+    "@emotion/react" "^11.7.1"
+    "@emotion/styled" "^11.6.0"
+    "@types/react" "^17.0.20"
+    "@types/react-dom" "^17.0.9"
+    react "^18.3.1"
+    react-dom "^18.3.1"
+    react-scripts "5.0.0"
+    typescript "^4.4.2"
 
 chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
@@ -4394,7 +4428,7 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-react-app@^7.0.1:
+eslint-config-react-app@^7.0.0, eslint-config-react-app@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-7.0.1.tgz#73ba3929978001c5c86274c017ea57eb5fa644b4"
   integrity sha512-K6rNzvkIeHaTd8m/QEh1Zko0KI7BACWkkneSs6s9cKZC/J27X3eZR6Upt1jkmZ/4FK+XUOPPxMEN7+lbUXfSlA==
@@ -8028,7 +8062,7 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
-react-dev-utils@^12.0.1:
+react-dev-utils@^12.0.0, react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-12.0.1.tgz#ba92edb4a1f379bd46ccd6bcd4e7bc398df33e73"
   integrity sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ==
@@ -8105,6 +8139,61 @@ react-router@6.26.2:
   integrity sha512-tvN1iuT03kHgOFnLPfLJ8V95eijteveqdOSk+srqfePtQvqCExB8eHOYnlilbOcyJyKnYkr1vJvf7YqotAJu1A==
   dependencies:
     "@remix-run/router" "1.19.2"
+
+react-scripts@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-5.0.0.tgz#6547a6d7f8b64364ef95273767466cc577cb4b60"
+  integrity sha512-3i0L2CyIlROz7mxETEdfif6Sfhh9Lfpzi10CtcGs1emDQStmZfWjJbAIMtRD0opVUjQuFWqHZyRZ9PPzKCFxWg==
+  dependencies:
+    "@babel/core" "^7.16.0"
+    "@pmmmwh/react-refresh-webpack-plugin" "^0.5.3"
+    "@svgr/webpack" "^5.5.0"
+    babel-jest "^27.4.2"
+    babel-loader "^8.2.3"
+    babel-plugin-named-asset-import "^0.3.8"
+    babel-preset-react-app "^10.0.1"
+    bfj "^7.0.2"
+    browserslist "^4.18.1"
+    camelcase "^6.2.1"
+    case-sensitive-paths-webpack-plugin "^2.4.0"
+    css-loader "^6.5.1"
+    css-minimizer-webpack-plugin "^3.2.0"
+    dotenv "^10.0.0"
+    dotenv-expand "^5.1.0"
+    eslint "^8.3.0"
+    eslint-config-react-app "^7.0.0"
+    eslint-webpack-plugin "^3.1.1"
+    file-loader "^6.2.0"
+    fs-extra "^10.0.0"
+    html-webpack-plugin "^5.5.0"
+    identity-obj-proxy "^3.0.0"
+    jest "^27.4.3"
+    jest-resolve "^27.4.2"
+    jest-watch-typeahead "^1.0.0"
+    mini-css-extract-plugin "^2.4.5"
+    postcss "^8.4.4"
+    postcss-flexbugs-fixes "^5.0.2"
+    postcss-loader "^6.2.1"
+    postcss-normalize "^10.0.1"
+    postcss-preset-env "^7.0.1"
+    prompts "^2.4.2"
+    react-app-polyfill "^3.0.0"
+    react-dev-utils "^12.0.0"
+    react-refresh "^0.11.0"
+    resolve "^1.20.0"
+    resolve-url-loader "^4.0.0"
+    sass-loader "^12.3.0"
+    semver "^7.3.5"
+    source-map-loader "^3.0.0"
+    style-loader "^3.3.1"
+    tailwindcss "^3.0.2"
+    terser-webpack-plugin "^5.2.5"
+    webpack "^5.64.4"
+    webpack-dev-server "^4.6.0"
+    webpack-manifest-plugin "^4.0.2"
+    workbox-webpack-plugin "^6.4.1"
+  optionalDependencies:
+    fsevents "^2.3.2"
 
 react-scripts@5.0.1:
   version "5.0.1"

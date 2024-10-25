@@ -72,7 +72,7 @@ export namespace Parser {
   }
 }
 
-namespace Bang {
+export namespace Bang {
   export interface T {
     name: string;
     template: string;

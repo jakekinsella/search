@@ -63,10 +63,8 @@ function Settings() {
         <Title>Settings</Title>
 
         <SettingsArea>
-          <SectionTitle>General</SectionTitle>
-          <SectionBreak />
-
           <SectionTitle>Bangs</SectionTitle>
+          <SectionBreak />
         </SettingsArea>
       </Container>
     </Page>

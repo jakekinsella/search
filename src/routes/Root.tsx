@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import styled from '@emotion/styled';
 
 import { Icon } from 'central';
 
+import { SettingsContext } from '../components/SettingsProvider';
 import { colors } from '../constants';
 
 const Page = styled.div`
@@ -142,6 +142,8 @@ function Root() {
   const [params, setParams] = useSearchParams();
   const [search, setSearch] = useState(params.get("q") === null ? "" : params.get("q"));
   const [error] = useState(params.get("e"));
+
+  const settings = useContext(SettingsContext);
 
   useEffect(() => {
     setParams({});

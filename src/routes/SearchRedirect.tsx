@@ -1,9 +1,9 @@
 import React from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
-import { bangs } from '../constants';
+import { SettingsContext } from '../components/SettingsProvider';
 import * as Search from '../search';
 
 function SearchRedirect() {
@@ -11,10 +11,12 @@ function SearchRedirect() {
   const [params, setParams] = useSearchParams();
   const query = params.get("q");
 
+  const settings = useContext(SettingsContext);
+
   const executed = useRef(false);
   useEffect(() => {
     if (query !== null) {
-      const result = Search.execute(bangs)(query);
+      const result = Search.execute(settings.bangs)(query);
       if (result.type === "error") {
         navigate(`/?q=${encodeURIComponent(query)}&e=${encodeURIComponent(result.error)}`)
       } else if (result.locations.length === 0) {

@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { Redirect } from 'central';
 
+import { SettingsProvider } from './components/SettingsProvider';
 import Root from './routes/Root';
 import SearchRedirect from './routes/SearchRedirect';
 import Settings from './routes/Settings';
@@ -18,11 +19,11 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
   {
     path: "/search",
-    element: <SearchRedirect />
+    element: <SettingsProvider><SearchRedirect /></SettingsProvider>
   },
   {
     path: "/settings",
-    element: <Settings />
+    element: <SettingsProvider><Settings /></SettingsProvider>
   },
   {
     path: "/login",
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Root />,
-    errorElement: <NotFound />
+    element: <SettingsProvider><Root /></SettingsProvider>,
+    errorElement: <SettingsProvider><NotFound /></SettingsProvider>
   },
 ]);
 

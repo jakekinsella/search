@@ -85,8 +85,7 @@ namespace Blob {
     );
 
     if (response.ok) {
-      const json: Blob.T = await response.json();
-      return json;
+      return;
     } else {
       throw new Error(`Blob.delete(${bucket}, ${key}) - failed to fetch`);
     }

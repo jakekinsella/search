@@ -32,7 +32,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <SettingsProvider><Root /></SettingsProvider>,
-    errorElement: <SettingsProvider><NotFound /></SettingsProvider>
+    errorElement: <NotFound />
   },
 ]);
 

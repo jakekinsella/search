@@ -34,7 +34,7 @@ function SearchRedirect() {
     } else {
       navigate(`/`)
     }
-  }, [query, navigate, setParams])
+  }, [query, navigate, setParams, settings])
 
   return (
     <div />

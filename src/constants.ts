@@ -1,5 +1,7 @@
 import { Constants } from 'central';
 
+import { Bang } from './search';
+
 export const login = `${Constants.central.root}/login?redirect=${encodeURIComponent(Constants.search.root)}`;
 
 export const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -25,7 +27,7 @@ export const colors = {
   red: '#ef5350'
 };
 
-export const bangs = [
+export const bangs: Bang.T[] = [
   { name: "google", template: "https://www.google.com/search?q=<query>" },
   { name: "g", template: "https://www.google.com/search?q=<query>" },
 

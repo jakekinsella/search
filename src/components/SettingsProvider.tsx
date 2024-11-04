@@ -15,7 +15,7 @@ async function getSettings(): Promise<Settings> {
 
   const settings = await Blob.get(user.email, "search/settings.json")
     .catch(() => {
-      return Blob.create(user.email, "search/settings.json", JSON.stringify(bangs), []);
+      return Blob.create(user.email, "search/settings.json", JSON.stringify({ bangs: bangs }), []);
     })
 
   return JSON.parse(settings.body);

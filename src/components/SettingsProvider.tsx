@@ -39,7 +39,7 @@ export function SettingsProvider({ children }: Props) {
 
   return (
     <SettingsContext.Provider value={settings ? settings : { bangs: [] }}>
-      {settings ? children : <div>Loading</div>}
+      {settings ? children : <div/>}
     </SettingsContext.Provider>
   );
 }

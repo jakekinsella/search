@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 
+import { SettingsContext } from '../components/SettingsProvider';
 import { colors } from '../constants';
 
 const Page = styled.div`
@@ -42,21 +43,46 @@ const SettingsArea = styled.div`
 `;
 
 const SectionTitle = styled.div`
-  font-size: 20px;
+  font-size: 22px;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
 
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 `
 
-const SectionBreak = styled.hr`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 0;
-  border-top: 1px solid ${colors.lightBlack};
+const AddBang = styled.span`
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+
+  padding-left: 4px;
+  padding-right: 4px;
+
+  cursor: pointer;
+
+  color: ${colors.black};
+  user-select: none;
+
+  &:hover {
+    color: ${colors.blackHover};
+  }
+
+  &:active {
+    color: ${colors.blackActive};
+  }
+`
+
+const SectionInner = styled.div`
+  font-size: 14px;
+
+  margin-top: 7px;
+  padding-left: 4px;
+  padding-right: 4px;
 `;
 
 function Settings() {
+  const settings = useContext(SettingsContext);
+
   return (
     <Page>
       <Container>
@@ -64,7 +90,11 @@ function Settings() {
 
         <SettingsArea>
           <SectionTitle>Bangs</SectionTitle>
-          <SectionBreak />
+          <AddBang>+ Add bang</AddBang>
+
+          <SectionInner>
+            {settings.bangs.map((bang) => <div key={bang.name}>{bang.name} / {bang.template}</div>)}
+          </SectionInner>
         </SettingsArea>
       </Container>
     </Page>

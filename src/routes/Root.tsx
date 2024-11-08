@@ -160,7 +160,7 @@ function Root() {
               <Title>Search Somewhere</Title>
 
               <Form onSubmit={onSubmit}>
-                <SearchBar value={search === null ? "" : search} onChange={(event) => setSearch(event.target.value)} />
+                <SearchBar value={search === null ? "" : search} onChange={(event) => setSearch(event.target.value)} autoFocus />
                 <SearchButton>
                   <ReflectX><Icon icon="search" size="1.25em" /></ReflectX>
                 </SearchButton>

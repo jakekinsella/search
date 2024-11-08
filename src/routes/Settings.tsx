@@ -13,6 +13,11 @@ const Page = styled.div`
   height: 100%;
 `;
 
+const PageInner = styled.div`
+  width: 100%;
+  height: 96%;
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -105,6 +110,28 @@ const FloatingPrompt = styled.div`
   z-index: 11;
 `;
 
+const Footer = styled.div`
+  text-align: right;
+
+  padding-right: 20px;
+`;
+
+const Link = styled.a`
+  cursor: pointer;
+  user-select: none;
+
+  color: ${colors.black};
+  text-decoration: none;
+
+  &:hover {
+    color: ${colors.blackHover};
+  }
+
+  &:active {
+    color: ${colors.blackActive};
+  }
+`;
+
 function Settings() {
   const settings = useContext(SettingsContext);
 
@@ -148,18 +175,24 @@ function Settings() {
 
   return (
     <Page>
-      <Container>
-        <Title>Settings</Title>
+      <PageInner>
+        <Container>
+          <Title>Settings</Title>
 
-        <SettingsArea>
-          <SectionTitle>Bangs</SectionTitle>
-          <AddBangText onClick={(event) => { event.stopPropagation(); setShowAddBang(true); }}>+ Add bang</AddBangText>
+          <SettingsArea>
+            <SectionTitle>Bangs</SectionTitle>
+            <AddBangText onClick={(event) => { event.stopPropagation(); setShowAddBang(true); }}>+ Add bang</AddBangText>
 
-          <SectionInner>
-            {settings.bangs.map((bang) => <Item key={bang.name}><ItemInner onClick={(event) => { event.stopPropagation(); setSelectedBang(bang); }}>{bang.name} / {bang.template}</ItemInner></Item>)}
-          </SectionInner>
-        </SettingsArea>
-      </Container>
+            <SectionInner>
+              {settings.bangs.map((bang) => <Item key={bang.name}><ItemInner onClick={(event) => { event.stopPropagation(); setSelectedBang(bang); }}>{bang.name} / {bang.template}</ItemInner></Item>)}
+            </SectionInner>
+          </SettingsArea>
+        </Container>
+      </PageInner>
+
+      <Footer>
+        <Link href="/">Home</Link>
+      </Footer>
 
       {selectedBang !== undefined ? renderRemoveBang(selectedBang) : <span />}
 

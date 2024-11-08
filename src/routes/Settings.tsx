@@ -2,8 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 
 import AddBang from '../components/AddBang';
+import RemoveBang from '../components/RemoveBang';
 import { SettingsContext } from '../components/SettingsProvider';
+
 import { colors } from '../constants';
+import { Bang } from '../search';
 
 const Page = styled.div`
   width: 100%;
@@ -21,8 +24,7 @@ const Container = styled.div`
 const Title = styled.div`
   width: 50%;
 
-  margin-left: 7px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 
   font-size: 36px;
   font-family: 'Roboto', sans-serif;
@@ -32,10 +34,10 @@ const Title = styled.div`
 const SettingsArea = styled.div`
   width: 50%;
 
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  padding-left: 17px;
+  padding-right: 17px;
 
   outline: 1.5px solid ${colors.lightBlack};
   border-radius: 5px;
@@ -50,7 +52,7 @@ const SectionTitle = styled.div`
 `;
 
 const AddBangText = styled.span`
-  font-size: 14px;
+  font-size: 15px;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
 
@@ -74,9 +76,17 @@ const AddBangText = styled.span`
 const SectionInner = styled.div`
   font-size: 14px;
 
-  margin-top: 7px;
+  margin-top: 13px;
   padding-left: 4px;
   padding-right: 4px;
+`;
+
+const Item = styled.div`
+  margin-bottom: 5px;
+`;
+
+const ItemInner = styled.span`
+  cursor: pointer;
 `;
 
 const FloatingPrompt = styled.div`
@@ -99,9 +109,11 @@ function Settings() {
   const settings = useContext(SettingsContext);
 
   const [showAddBang, setShowAddBang] = useState<boolean>(false);
+  const [selectedBang, setSelectedBang] = useState<Bang.T | undefined>(undefined);
 
   const hide = () => {
     setShowAddBang(false);
+    setSelectedBang(undefined);
   }
 
   useEffect(() => {
@@ -124,6 +136,16 @@ function Settings() {
     return () => document.removeEventListener("click", listener)
   }, []);
 
+  const renderRemoveBang = (bang : Bang.T) => {
+    return (
+      <FloatingPrompt>
+        <div onClick={(event) => event.stopPropagation() }>
+          <RemoveBang onSubmit={() => hide()} bang={bang} />
+        </div>
+      </FloatingPrompt>
+    );
+  }
+
   return (
     <Page>
       <Container>
@@ -131,13 +153,15 @@ function Settings() {
 
         <SettingsArea>
           <SectionTitle>Bangs</SectionTitle>
-          <AddBangText onClick={(event) => { event.stopPropagation(); setShowAddBang(true) }}>+ Add bang</AddBangText>
+          <AddBangText onClick={(event) => { event.stopPropagation(); setShowAddBang(true); }}>+ Add bang</AddBangText>
 
           <SectionInner>
-            {settings.bangs.map((bang) => <div key={bang.name}>{bang.name} / {bang.template}</div>)}
+            {settings.bangs.map((bang) => <Item key={bang.name}><ItemInner onClick={(event) => { event.stopPropagation(); setSelectedBang(bang); }}>{bang.name} / {bang.template}</ItemInner></Item>)}
           </SectionInner>
         </SettingsArea>
       </Container>
+
+      {selectedBang !== undefined ? renderRemoveBang(selectedBang) : <span />}
 
       <FloatingPrompt style={{ visibility: showAddBang ? "visible" : "hidden" }}>
         <div onClick={(event) => event.stopPropagation() }>

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
+
+import { SettingsContext } from './SettingsProvider';
 
 import { colors } from '../constants';
 
 const Card = styled.div`
   width: 325px;
-  height: 250px;
   background-color: ${colors.white};
 
   padding-top: 20px;
@@ -96,6 +97,8 @@ function AddBang({ onSubmit, show }: Props) {
   const [alias, setAlias] = useState('');
   const [template, setTemplate] = useState('');
   const [error, setError] = useState('');
+
+  const settings = useContext(SettingsContext);
 
   useEffect(() => {
     if (!show) {

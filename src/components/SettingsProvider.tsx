@@ -1,39 +1,25 @@
 import React, { useState, createContext, useEffect } from 'react';
 
 import { bangs } from '../constants';
-import { Bang } from '../search';
-import Blob from '../blob';
-import Central from '../central';
+import Settings from '../settings';
 
-export interface Settings {
-  bangs: Bang.T[];
-}
-export const SettingsContext = createContext<Settings>({ bangs: [] });
-
-async function getSettings(): Promise<Settings> {
-  const user = await Central.getCurrentUser();
-
-  const settings = await Blob.get(user.email, "search/settings.json")
-    .catch(() => {
-      return Blob.create(user.email, "search/settings.json", JSON.stringify({ bangs: bangs }), []);
-    })
-
-  return JSON.parse(settings.body);
-}
+export const SettingsContext = createContext<Settings.T>({ bangs: [] });
 
 interface Props {
   children: React.ReactNode
 }
 export function SettingsProvider({ children }: Props) {
   const [loading, setLoading] = useState(false);
-  const [settings, setSettings] = useState<Settings | undefined>(undefined);
+  const [settings, setSettings] = useState<Settings.T | undefined>(undefined);
 
   useEffect(() => {
     if (!loading) {
       setLoading(true);
-      getSettings().then((settings) => {
-        setSettings(settings);
-      })
+      Settings.get()
+        .catch(() => Settings.create({ bangs: bangs}))
+        .then((settings) => {
+          setSettings(settings);
+        });
     }
   }, [loading]);
 

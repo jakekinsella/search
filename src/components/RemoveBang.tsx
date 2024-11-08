@@ -5,8 +5,11 @@ import { SettingsContext } from './SettingsProvider';
 
 import { colors } from '../constants';
 import { Bang } from '../search';
+import Settings from '../settings';
 
 const Card = styled.div`
+  min-width: 300px;
+
   background-color: ${colors.white};
 
   padding-top: 20px;
@@ -58,25 +61,24 @@ const Label = styled.div`
 `;
 
 interface Props {
-  onSubmit: () => void;
   bang: Bang.T;
 }
 
-function RemoveBang({ onSubmit, bang }: Props) {
+function RemoveBang({ bang }: Props) {
   const settings = useContext(SettingsContext);
 
-  const _onSubmit = async (event: any) => {
+  const onSubmit = async (event: any) => {
     event.preventDefault();
 
-    console.log(bang);
-    onSubmit();
+    await Settings.removeBang(settings, bang);
+    window.location.reload();
   }
 
   return (
     <Card>
       <Title>Remove Bang</Title>
 
-      <form onSubmit={_onSubmit}>
+      <form onSubmit={onSubmit}>
         <Label>Alias: {bang.name}</Label>
         <Label>Template: {bang.template}</Label>
         <br />

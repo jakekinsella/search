@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { SettingsContext } from './SettingsProvider';
 
 import { colors } from '../constants';
+import Settings from '../settings';
 
 const Card = styled.div`
   width: 325px;
@@ -89,11 +90,10 @@ const Spacer = styled.div`
 `;
 
 interface Props {
-  onSubmit: () => void;
   show: boolean;
 }
 
-function AddBang({ onSubmit, show }: Props) {
+function AddBang({ show }: Props) {
   const [alias, setAlias] = useState('');
   const [template, setTemplate] = useState('');
   const [error, setError] = useState('');
@@ -108,19 +108,22 @@ function AddBang({ onSubmit, show }: Props) {
     }
   }, [show]);
 
-  const _onSubmit = async (event: any) => {
+  const onSubmit = async (event: any) => {
     event.preventDefault();
-
-    console.log(alias);
-    console.log(template);
-    onSubmit();
+    
+    const result = await Settings.addBang(settings, { name: alias, template: template});
+    if (result.type === "result") {
+      window.location.reload();
+    } else {
+      setError(result.error)
+    }
   }
 
   return (
     <Card>
       <Title>Add Bang</Title>
 
-      <form onSubmit={_onSubmit}>
+      <form onSubmit={onSubmit}>
         <Label>Alias:</Label>
         <Textbox type="text" onChange={(event) => setAlias(event.target.value)} value={alias} required />
         <Spacer />

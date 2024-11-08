@@ -12,14 +12,25 @@ export function SettingsProvider({ children }: Props) {
   const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState<Settings.T | undefined>(undefined);
 
+  const getOrCreate = async () => {
+    const tryGet = await Settings.get();
+    if (tryGet.type === "result") {
+      setSettings(tryGet.settings);
+    } else {
+      console.log(tryGet);
+      const tryCreate = await Settings.create({ bangs: bangs });
+      if (tryCreate.type === "result") {
+        setSettings(tryCreate.settings);
+      } else {
+        console.log(tryCreate);
+      }
+    }
+  }
+
   useEffect(() => {
     if (!loading) {
       setLoading(true);
-      Settings.get()
-        .catch(() => Settings.create({ bangs: bangs}))
-        .then((settings) => {
-          setSettings(settings);
-        });
+      getOrCreate();
     }
   }, [loading]);
 

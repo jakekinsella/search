@@ -140,7 +140,7 @@ function Settings() {
     return (
       <FloatingPrompt>
         <div onClick={(event) => event.stopPropagation() }>
-          <RemoveBang onSubmit={() => hide()} bang={bang} />
+          <RemoveBang bang={bang} />
         </div>
       </FloatingPrompt>
     );
@@ -165,7 +165,7 @@ function Settings() {
 
       <FloatingPrompt style={{ visibility: showAddBang ? "visible" : "hidden" }}>
         <div onClick={(event) => event.stopPropagation() }>
-          <AddBang onSubmit={() => hide()} show={showAddBang} />
+          <AddBang show={showAddBang} />
         </div>
       </FloatingPrompt>
     </Page>

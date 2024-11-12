@@ -38,5 +38,4 @@ Deploy the cluster:
 ... wait \~10minutes time (until `sudo kubectl get pods` shows all the containers running) ...  
 
 ## To-Do
- - Add custom search locations
- - Toggle dark mode
+ - ???

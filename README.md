@@ -38,4 +38,4 @@ Deploy the cluster:
 ... wait \~10minutes time (until `sudo kubectl get pods` shows all the containers running) ...  
 
 ## To-Do
- - On login, redirect to whatever search user was attempting to perform
+ - ???

@@ -2,16 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Redirect } from 'central';
-
 import { SettingsProvider } from './components/SettingsProvider';
+import RedirectToLogin from './components/RedirectToLogin';
 import Root from './routes/Root';
 import SearchRedirect from './routes/SearchRedirect';
 import Settings from './routes/Settings';
 import NotFound from './routes/NotFound';
 
 import './global-styles';
-import { login } from './constants';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -27,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Redirect to={login} />
+    element: <RedirectToLogin />
   },
   {
     path: "/",

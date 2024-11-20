@@ -1,8 +1,4 @@
-import { Constants } from 'central';
-
 import { Bang } from './search';
-
-export const login = `${Constants.central.root}/login?redirect=${encodeURIComponent(Constants.search.root)}`;
 
 export const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 

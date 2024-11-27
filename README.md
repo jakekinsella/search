@@ -10,6 +10,7 @@ Deploy a single node Kubernetes cluster in AWS.
  - [Terraform](https://www.terraform.io)
 
 ### Initial Setup
+Complete the prerequisites found at [Central](https://github.com/TheLocust3/central?tab=readme-ov-file#cloud-deploy).  
   
 Environment variables:
 ```
@@ -35,7 +36,5 @@ Deploy the cluster:
 `make cluster-publish`  
 `make cluster-deploy VERSION=???`  
 
-... wait \~10minutes time (until `sudo kubectl get pods` shows all the containers running) ...  
-
 ## To-Do
- - ???
+ - Less hacky local development environment

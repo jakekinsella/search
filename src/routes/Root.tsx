@@ -43,6 +43,11 @@ const SearchArea = styled.div`
 const SearchContainer = styled.div`
   width: 50%;
   margin-top: 25vh;
+
+  @media (max-width: 750px) {
+    width: 90%;
+    margin-top: 20vh;
+  }
 `;
 
 const Form = styled.form`
@@ -118,6 +123,10 @@ const Footer = styled.div`
   text-align: right;
 
   padding-right: 20px;
+
+  @media (max-width: 750px) {
+    display: none;
+  }
 `;
 
 const Settings = styled.a`

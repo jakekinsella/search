@@ -79,7 +79,7 @@ export namespace Bang {
   }
 
   export const resolve = (bang: T) => (query: string): string => {
-    return bang.template.replace("<query>", query);
+    return bang.template.replace("<query>", encodeURIComponent(query));
   }
 }
 

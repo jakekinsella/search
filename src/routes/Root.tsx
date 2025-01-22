@@ -148,7 +148,7 @@ function Root() {
 
   function onSubmit(event: any) {
     event.preventDefault();
-    navigate(`/search?q=${search}`)
+    navigate(`/search?q=${search === null ? '' : encodeURIComponent(search)}`)
   }
 
   return (
